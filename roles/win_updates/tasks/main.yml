@@ -4,7 +4,6 @@
     category_names: "{{ categories }}"
     blacklist: "{{ blacklist_package | default(omit, true) }}"
     whitelist: "{{ whitelist_package | default(omit, true) }}"
-    reboot: yes
-    reboot_timeout: 1400
-
- 
+  register: update_result
+- win_reboot:
+  when: update_result.reboot_required
