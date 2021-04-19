@@ -1,6 +1,6 @@
 ---
 category: ['Updates'] #good example of single item of list [SecurityUpdates, 'Updates'] for multiple
-email_account: "ansible.dev1@gmail.com"
-email_account_password: "12QWaszx!"
+gmail_account: "ansible.dev1@gmail.com"
+gmail_account_password: "12QWaszx!"
 sendto_email: "Ansible Dev <ansible.dev1@gmail.com>"
 
