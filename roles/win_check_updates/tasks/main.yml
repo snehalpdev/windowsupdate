@@ -79,7 +79,7 @@
 
 - name: Send Email with Report
   mail:
-    host: aspmx.l.google.com
+    host: smtp.mailtrap.io
     port: 25
     username: "{{ email_account }}"
     password: "{{ email_password }}"
