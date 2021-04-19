@@ -1,0 +1,17 @@
+         <tr>
+            <td>{{ inventory_hostname }}</td>
+            <td>
+               <ul>
+{% for win_update in list_of_updates.updates | dict2items %}
+                  <li>{{ win_update.value.title }}</li>
+{% endfor %}
+               </ul>
+            </td>
+			<td>
+               <ul>
+{% for pending_reboot in pending_reboot.stdout_lines[0] | dict2items %}
+                  <li>{{ pending_reboot.value.title }}</li>
+{% endfor %}
+               </ul>
+            </td>	
+         </tr>
