@@ -79,13 +79,11 @@
 
 - name: Send Email with Report
   mail:
-    host: smtp.gmail.com
-    port: 587
-    Use Authentication: No
-    username: "{{ gmail_account }}"
-    password: "{{ gmail_account_password }}"
+    host: relay.nttict.com.au
+    port: 25
+    username: "{{ email_account }}"
     to: "{{ sendto_email }}"
-    subject: "Ansible Report"
+    subject: "Ansible - Windows Update Report"
     body: "The list of required Windows Update for the Windows VMs can be found in the attached file"
     attach:
      - reports/Consolidated_VMs_Report.html
