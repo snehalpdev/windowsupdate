@@ -83,10 +83,10 @@
 
 - name: Send Email with Report
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: "{{ gmail_account }}"
-    password: "{{ gmail_account_password }}"
+    host: smtp.mailtrap.io
+    port: 25
+    username: "{{ email_account }}"
+    password: "{{ email_account_password }}"
     to: "{{ sendto_email }}"
     subject: "Ansible Report"
     body: "The list of required Windows Update for the Windows VMs can be found in the attached file"
