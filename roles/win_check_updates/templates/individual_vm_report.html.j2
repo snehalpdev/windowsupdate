@@ -10,7 +10,7 @@
 			<td>
                <ul>
 {% for pending_reboot in pending_reboot.stdout_lines[0] | dict2items %}
-                  <li>{{ pending_reboot.value.title }}</li>
+                  <li>{{ pending_reboot.stdout_lines[0] }}</li>
 {% endfor %}
                </ul>
             </td>	
