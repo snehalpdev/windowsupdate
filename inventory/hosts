@@ -1,0 +1,9 @@
+[win]
+server01
+server02
+
+[win:vars]
+ansible_user=vagrant
+ansible_password=vagrant
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
