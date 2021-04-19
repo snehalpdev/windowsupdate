@@ -1,0 +1,13 @@
+---
+- name: install updates
+  hosts: win
+  gather_facts: False
+
+  roles:
+    - win_updates
+
+ 
+
+
+
+
