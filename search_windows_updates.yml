@@ -1,0 +1,13 @@
+---
+- name: search updates
+  hosts: win
+  gather_facts: False
+
+  roles:
+    - win_check_updates
+
+ 
+
+
+
+
