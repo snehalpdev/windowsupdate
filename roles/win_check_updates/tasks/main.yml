@@ -81,6 +81,7 @@
   mail:
     host: smtp.gmail.com
     port: 587
+    Use Authentication: No
     username: "{{ gmail_account }}"
     password: "{{ gmail_account_password }}"
     to: "{{ sendto_email }}"
