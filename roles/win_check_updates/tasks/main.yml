@@ -8,6 +8,7 @@
 - name: Check if the reboot is pending
   win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
   register: pending_reboot
+  delegate_to: localhost
 
 - name: Clean Up Reports Directory if it exists
   file:
@@ -94,6 +95,3 @@
      - reports/Consolidated_VMs_Report.html
   delegate_to: localhost
   run_once: yes
-  
-  - name: run all notified handlers
-    meta: flush_handlers
