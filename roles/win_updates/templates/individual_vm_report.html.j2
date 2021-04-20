@@ -2,8 +2,8 @@
             <td>{{ inventory_hostname }}</td>
             <td>
                <ul>
-{% for k in update_results.updates %}
-                  <li>{{ update_results.updates[k].title }}</li>
+{% for k in update_result.updates %}
+                  <li>{{ update_result.updates[k].title }}</li>
 {% endfor %}
                </ul>
             </td>
