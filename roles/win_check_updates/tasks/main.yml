@@ -1,6 +1,6 @@
 ---
 - name: Search and return list of found updates
-  win_updates:
+  win_update:
     category_names: "{{ category }}"
     state: searched
   register: list_of_updates
