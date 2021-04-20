@@ -1,13 +1,14 @@
 --- 
 - name: Install Windows updates
-  win_updates:
+  ansible.windows.win_updates:
     category_names: "{{ category }}"
     blacklist: "{{ blacklist_package | default(omit, true) }}"
     whitelist: "{{ whitelist_package | default(omit, true) }}"
     state: installed
   register: update_result
-- win_reboot:
+- ansible.windows.win_reboot:
   when: update_result.reboot_required
+  reboot_timeout: 3600
   
 - name: Clean Up Reports Directory if it exists
   file:
