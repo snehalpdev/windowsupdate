@@ -9,8 +9,8 @@
             </td>
 			<td>
                <ul>
-{% for pending_reboot in pending_reboot.stdout_lines[0] | dict2items %}
-                  <li>{{ pending_reboot.value.title }}</li>
+{% for pending_reboot in update_result.reboot_required | dict2items %}
+                      {{ pending_reboot.value.title }}
 {% endfor %}
                </ul>
             </td>	
