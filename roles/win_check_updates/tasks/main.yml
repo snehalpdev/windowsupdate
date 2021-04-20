@@ -1,6 +1,6 @@
 ---
 - name: Search and return list of found updates
-  ansible.windows.win_updates:
+  win_updates:
     category_names: "{{ category }}"
     state: searched
   register: list_of_updates
