@@ -1,7 +1,7 @@
 --- 
 - name: Install Windows updates
   win_updates:
-    category_names: "{{ categories }}"
+    category_names: "{{ category }}"
     blacklist: "{{ blacklist_package | default(omit, true) }}"
     whitelist: "{{ whitelist_package | default(omit, true) }}"
     state: installed
