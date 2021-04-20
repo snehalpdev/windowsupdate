@@ -2,9 +2,7 @@
             <td>{{ inventory_hostname }}</td>
             <td>
                <ul>
-{% for win_update in update_result.stdout_lines | dict2items %}
-                  <li>{{ win_update.value.title }}</li>
-{% endfor %}
+                  <li>{{ update_result.stdout_lines }}</li>
                </ul>
             </td>
 			<td>
