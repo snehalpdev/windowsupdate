@@ -4,7 +4,7 @@
     category_names: "{{ category }}"
     state: searched
   register: list_of_updates
-  
+
 - name: Check if the reboot is pending
   win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
   register: pending_reboot
