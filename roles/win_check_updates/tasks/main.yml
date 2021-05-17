@@ -13,8 +13,7 @@
   win_disk_facts:
 - set_fact:
     disk: '{{ ansible_facts.disks | selectattr("system_disk")|first }}'
-- name: Get free disk space on C drive
-  var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
+    var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
   when: item.0.drive_letter == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
   register: "{{ var_diskspace }}"
