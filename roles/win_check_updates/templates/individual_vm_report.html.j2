@@ -11,7 +11,10 @@
 {% endfor %}
                </ul>
             </td>
-			<td>
+	    <td> 
+	    {{ var_diskspace }}
+	    </td>
+	    <td>
                <ul>
                   {{ pending_reboot.stdout_lines[0] }}
                </ul>
