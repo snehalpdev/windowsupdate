@@ -8,12 +8,10 @@
 - name: Check if the reboot is pending
   win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
   register: pending_reboot
-  
-- name: Get disk facts
+   
+- name: get disk space
   win_disk_facts:
-- set_fact:
-    disk: '{{ ansible_facts.disks | selectattr("system_disk")|first }}'
-- name: get disk space    
+  disk: '{{ ansible_facts.disks | selectattr("system_disk")|first }}'
   var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
   when: item.0.drive_letter == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
