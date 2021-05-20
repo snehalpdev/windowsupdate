@@ -15,6 +15,7 @@
     disk: '{{ disk }}'
   loop: "{{ disk.partitions | subelements('volumes') }}"
   var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
+  register: var_diskspace
   when: item.0.drive_letter == "C"
 
 - name: Clean Up Reports Directory if it exists
