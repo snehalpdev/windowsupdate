@@ -12,12 +12,13 @@
 - name: get disk facts
   win_disk_facts:
   
+- set_fact:
+    disk: '{{ disk }}'
+
 - name: get disk space
-  vars:
-    disk: '{ ansible_facts.disks | selectattr("system_disk")|first }}'
-    var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
-  when: item.0.drive_letter == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
+  var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
+  when: item.0.drive_letter == "C"
   register: "{{ var_diskspace }}"
 
 - name: Clean Up Reports Directory if it exists
