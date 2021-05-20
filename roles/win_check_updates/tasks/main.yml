@@ -12,7 +12,7 @@
 - name: get disk space
   win_disk_facts:
   vars:
-    disk: "{ ansible_facts.disks | selectattr("system_disk")|first }}"
+    disk: '{ ansible_facts.disks | selectattr("system_disk")|first }}'
     var_diskspace: "{{ item.1.size_remaining/1024|pow(3)|float|round(1) }}"
   when: item.0.drive_letter == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
