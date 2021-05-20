@@ -13,7 +13,7 @@
             </td>
 	    <td>
 	    <ul>
-	    {{ var_diskspace }}
+	    {{ var_diskspace.volumes.size_remaining/1024|pow(3)|float }}
 	    </ul>
 	    </td>
 	    <td>
