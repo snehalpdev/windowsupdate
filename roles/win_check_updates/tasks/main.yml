@@ -11,7 +11,7 @@
    
 - name: Get disk facts
   win_disk_facts:
-  var:
+  vars:
     disk: '{{ ansible_facts.disks[0] }}'
 - set_fact:
     disk: '{{ disk }}'
