@@ -37,7 +37,7 @@
    </head>
 
    <body>
-   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Windows Update Precheck Report - {{ '%d-%m-%Y %H:%M:%S' }}" title="Type in an Update">
+   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Windows Update Precheck Report - {{ '%d-%m-%Y %H:%M:%S' | strftime }}" title="Type in an Update">
    
       <table id="myTable" border = "1" cellpadding = "5" cellspacing = "5">
          <tr>
