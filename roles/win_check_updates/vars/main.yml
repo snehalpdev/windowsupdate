@@ -1,6 +1,9 @@
 ---
 category: ['Updates'] #good example of single item of list [SecurityUpdates, 'Updates'] for multiple
 disk: '{{ ansible_facts.disks[0] }}'
+vol_part: '{{ disk.partitions[1].drive_letter }}'
+vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
+vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
 email_account: "13cdc618117f13"
 email_account_password: "cd5848a59223e6"
 sendto_email: "Ansible Dev <13cdc618117f13>"
