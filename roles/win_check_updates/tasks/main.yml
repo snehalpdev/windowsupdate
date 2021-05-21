@@ -13,15 +13,11 @@
   win_disk_facts:
   
 - set_fact:
-    disk: '{{ disk }}'
     partition_list: "{{ partition_list | default([]) + [{ 'partition': item.0.drive_letter, 'size': (item.1.size/1024|pow(3))|float|round(1), 'free': item.1.size_remaining/1024|pow(3)|float|round(1) }] }}"
   loop: "{{ disk.partitions | subelements('volumes') }}"
-- name: "Get disk space"
-  debug:
-    msg: "Partition {{ item.partition }} - Size{{ item.size }} / {{ item.free }}"
-  loop: "{{ partition_list }}"
-  register: msg
   
+- name: "Get disk space"
+  loop: "{{ partition_list }}" 
 
 - name: Clean Up Reports Directory if it exists
   file:
