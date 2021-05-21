@@ -9,18 +9,18 @@
   win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
   register: pending_reboot
    
-  - name: Get disk facts
-    win_disk_facts:
-  - set_fact:
-      disk: '{{ ansible_facts.disks | selectattr("system_disk")|first }}'
+- name: Get disk facts
+  win_disk_facts:
+- set_fact:
+    disk: '{{ ansible_facts.disks | selectattr("system_disk")|first }}'
     
-  - name: "Ensure that free space on C is greater than 10GB"
-    assert:
-      that: item.1.size_remaining/1024|pow(3)|float|round(1) > 10
-      msg: "C drive has {{ item.1.size_remaining/1024|pow(3)|float|round(1) }} GB free, need atleast 10GB free to proceed"
-    when: item.0.drive_letter == "C"    
-    loop: "{{ disk.partitions | subelements('volumes') }}"
-    register: var_diskspace
+- name: "Ensure that free space on C is greater than 10GB"
+  assert:
+    that: item.1.size_remaining/1024|pow(3)|float|round(1) > 10
+    msg: "C drive has {{ item.1.size_remaining/1024|pow(3)|float|round(1) }} GB free, need atleast 10GB free to proceed"
+  when: item.0.drive_letter == "C"    
+  loop: "{{ disk.partitions | subelements('volumes') }}"
+  register: var_diskspace
   
 
 - name: Clean Up Reports Directory if it exists
