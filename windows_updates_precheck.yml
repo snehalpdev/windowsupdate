@@ -1,6 +1,6 @@
 ---
 - name: windows update precheck
-  hosts: win
+  hosts: all
   gather_facts: False
 
   roles:
