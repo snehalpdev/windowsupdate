@@ -1,5 +1,5 @@
 ---
-- hosts: win
+- hosts: all
   strategy: free
   tasks:
   - name: Check if the reboot is pending
