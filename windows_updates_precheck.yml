@@ -1,5 +1,5 @@
 ---
-- name: search updates
+- name: windows update precheck
   hosts: win
   gather_facts: False
 
