@@ -1,6 +1,7 @@
 ---
 - name: install updates
   hosts: all
+  strategy: free
   gather_facts: False
 
   roles:
