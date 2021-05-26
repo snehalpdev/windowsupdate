@@ -3,9 +3,11 @@
             <td>
                <ul>
 {% for k in update_result.updates %}
+                  {% if update_result|length >=1 %}
                   <li>{{ update_result.updates[k].title }}</li>
-{% else %}
+                  {% else %}
 		  {{ "No updates available to Install" }}
+		  {% endif %}
 {% endfor %}
                </ul>
             </td>
