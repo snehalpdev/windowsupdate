@@ -1,6 +1,6 @@
 ---
 - name: install updates
-  hosts: win
+  hosts: all
   gather_facts: False
 
   roles:
