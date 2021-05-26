@@ -1,0 +1,18 @@
+---
+- hosts: win
+  strategy: free
+  tasks:
+  - name: Check if the reboot is pending
+    win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
+    register: pending_reboot
+    changed_when: pending_reboot.stdout_lines[0] != 'False'
+    notify: reboot windows
+  
+  - block:
+      - debug:
+          msg: |
+            Reboot pending on Host {{ inventory_hostname }} is {{ pending_reboot.stdout_lines[0] }}
+  handlers:
+    - name: reboot windows
+      win_reboot:
+        reboot_timeout: 3600
