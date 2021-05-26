@@ -7,8 +7,9 @@
     state: installed
   register: update_result
 - win_reboot:
+    reboot_timeout: 3600
   when: update_result.reboot_required
-  reboot_timeout: 3600
+  
   
 - name: Clean Up Reports Directory if it exists
   file:
