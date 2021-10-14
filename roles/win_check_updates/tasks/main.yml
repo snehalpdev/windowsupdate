@@ -8,8 +8,6 @@
 - name: Check if the reboot is pending
   win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
   register: pending_reboot
-  notify:
-    - rebootvm
    
 - name: Get disk facts
   win_disk_facts:
