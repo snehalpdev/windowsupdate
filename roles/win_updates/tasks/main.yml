@@ -85,10 +85,8 @@
 
 - name: Send Email with Report
   mail:
-    host: smtp.mailtrap.io
+    host: globmail.esbu.nttict.com.au
     port: 25
-    username: "{{ email_account }}"
-    password: "{{ email_account_password }}"
     to: "{{ sendto_email }}"
     subject: "Ansible Report"
     body: "The list of required Windows Update for the Windows VMs can be found in the attached file"
