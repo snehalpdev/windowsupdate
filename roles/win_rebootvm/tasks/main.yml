@@ -1,0 +1,10 @@
+- name: check pending reboot
+  win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
+  register: pending_reboot
+  changed_when: pending_reboot.stdout_lines[0] != 'False'
+  notify:
+    - rebootvm
+    
+- name: run all notified handlers
+  meta: flush_handlers
+    
