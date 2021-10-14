@@ -1,5 +1,0 @@
-
----
-  - name: reboot windows
-    win_reboot:
-      reboot_timeout: 9000
