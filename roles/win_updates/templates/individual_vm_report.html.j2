@@ -6,7 +6,7 @@
                   {% if update_result|length >=1 %}
                   <li>{{ update_result.updates[k].title }}</li>
                   {% else %}
-		  <li> No updates available to Install </li>
+		  <p> No updates available to Install </p>
 		  {% endif %}
 {% endfor %}
                </ul>
