@@ -4,29 +4,29 @@
   strategy: free
   gather_facts: False
   
-- name: Check if the reboot is pending
-  win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
-  register: pending_reboot
-  assert:
-    that: pending_reboot.stdout_lines[0] == false
-    msg: 'Server reboot pending is {{ pending_reboot }}'
+  - name: Check if the reboot is pending
+    win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
+    register: pending_reboot
+    assert:
+      that: pending_reboot.stdout_lines[0] == false
+      msg: 'Server reboot pending is {{ pending_reboot }}'
    
-- name: Get disk facts
-  win_disk_facts:
+  - name: Get disk facts
+    win_disk_facts:
 
-- name: Output first disk size
-  debug:
-    disk: '{{ ansible_facts.disks[0] }}'
-    vol_part: '{{ disk.partitions[1].drive_letter }}'
-    vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
-    vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
+  - name: Output first disk size
+    debug:
+      disk: '{{ ansible_facts.disks[0] }}'
+      vol_part: '{{ disk.partitions[1].drive_letter }}'
+      vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
+      vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
 
  
-- name: "Ensure that free disk space on {{ vol_part }} drive is greater than 10GB"
-  assert:
-    that: vol_part_free > 10
-    msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
-  loop: "{{ disk.partitions | subelements('volumes') }}"
+  - name: "Ensure that free disk space on {{ vol_part }} drive is greater than 10GB"
+    assert:
+      that: vol_part_free > 10
+      msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
+    loop: "{{ disk.partitions | subelements('volumes') }}"
   
-- debug:
-    msg: "{{ vol_part_free }}"
+  - debug:
+      msg: "{{ vol_part_free }}"
