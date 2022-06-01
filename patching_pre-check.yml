@@ -4,9 +4,11 @@
   strategy: free
   gather_facts: False
   
-  - name: Check if the reboot is pending
+  - name: set if the reboot is pending
     win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
     register: pending_reboot
+    
+  - name: check if reboot is pending  
     assert:
       that: pending_reboot.stdout_lines[0] == false
       msg: 'Server reboot pending is {{ pending_reboot }}'
