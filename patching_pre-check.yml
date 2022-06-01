@@ -11,7 +11,7 @@
       
     - name: check if the reboot is pending
       assert:
-        that: {{ pending_reboot }} == false
+        that: {{ pending_reboot }} = false
         msg: 'Server reboot pending is {{ pending_reboot }}'
    
     - name: Get disk facts
