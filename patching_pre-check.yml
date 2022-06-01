@@ -1,4 +1,8 @@
 ---
+hosts: all
+strategy: free
+gather_facts: False
+  
 - name: Check if the reboot is pending
   win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
   register: pending_reboot
