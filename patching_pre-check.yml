@@ -9,7 +9,7 @@
   register: pending_reboot
   assert:
     that: pending_reboot.stdout_lines[0] == false
-     msg: "Server reboot pending is {{ pending_reboot }}"
+     msg: "Server reboot pending is true"
    
 - name: Get disk facts
   win_disk_facts:
