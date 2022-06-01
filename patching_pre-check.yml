@@ -1,0 +1,24 @@
+---
+- name: Check if the reboot is pending
+  win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
+  register: pending_reboot
+  assert:
+    that: pending_reboot.stdout_lines[0] == false
+	  msg: 'Server reboot pending is {{ pending_reboot }}
+   
+- name: Get disk facts
+  win_disk_facts:
+
+- name: Output first disk size
+  debug:
+    disk: '{{ ansible_facts.disks[0] }}' 
+ 
+- name: "Ensure that free disk space on {{ disk.partitions[1].drive_letter }} drive is greater than 10GB"
+  assert:
+    that: {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }} > 10
+	  msg: 'Remaining disk space has reached {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }} need 10GB to proceed.'
+  when: {{ disk.partitions[1].drive_letter }} == "C"
+  loop: "{{ disk.partitions | subelements('volumes') }}"
+  
+- debug:
+    msg: "{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}"
