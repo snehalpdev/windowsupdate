@@ -26,8 +26,6 @@
   assert:
     that: vol_part_free > 10
     msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
-  with_items: 
-    - "{{ vol_part }}" == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
   
 - debug:
