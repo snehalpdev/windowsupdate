@@ -20,10 +20,10 @@
  
 - name: "Ensure that free disk space on {{ disk.partitions[1].drive_letter }} drive is greater than 10GB"
   assert:
-    that: {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }} > 10
-    msg: 'Remaining disk space has reached {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }} need 10GB to proceed.'
+    that: item.1.size/1024|pow(3))|float|round(1) > 10
+    msg: 'Remaining disk space has reached item.1.size/1024|pow(3))|float|round(1) need 10GB to proceed.'
   when: {{ disk.partitions[1].drive_letter }} == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
   
 - debug:
-    msg: "{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}"
+    msg: "item.1.size/1024|pow(3))|float|round(1)"
