@@ -8,6 +8,8 @@
     - name: set if the reboot is pending
       win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
       register: pending_reboot
+      
+    - name: check if the reboot is pending
       assert:
         that: pending_reboot.stdout_lines[0] == false
         msg: 'Server reboot pending is {{ pending_reboot }}'
