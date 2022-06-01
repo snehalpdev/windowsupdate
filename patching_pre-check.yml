@@ -16,14 +16,18 @@
 
 - name: Output first disk size
   debug:
-    disk: '{{ ansible_facts.disks[0] }}' 
+    disk: '{{ ansible_facts.disks[0] }}'
+    vol_part: '{{ disk.partitions[1].drive_letter }}'
+    vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
+    vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
+
  
-- name: "Ensure that free disk space on {{ disk.partitions[1].drive_letter }} drive is greater than 10GB"
+- name: "Ensure that free disk space on {{ vol_part }} drive is greater than 10GB"
   assert:
-    that: item.1.size/1024|pow(3))|float|round(1) > 10
-    msg: 'Remaining disk space has reached item.1.size/1024|pow(3))|float|round(1) need 10GB to proceed.'
-  when: {{ disk.partitions[1].drive_letter }} == "C"
+    that: {{ vol_part_free }} > 10
+    msg: 'Remaining disk space has reached vol_part_free need 10GB to proceed.'
+  when: {{ vol_part }} == "C"
   loop: "{{ disk.partitions | subelements('volumes') }}"
   
 - debug:
-    msg: "item.1.size/1024|pow(3))|float|round(1)"
+    msg: "{{ vol_part_free }}"
