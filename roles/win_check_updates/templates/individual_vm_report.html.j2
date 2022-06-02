@@ -4,9 +4,9 @@
                <ul>
 {% for win_update in list_of_updates.updates | dict2items %}
                   {% if win_update|length >=1 %}
-                 <td> <li>{{ win_update.value.title }}</li></td>
+                  <li>{{ win_update.value.title }}</li>
 		  {% else %}
-		  <td> "No updates available" </td>
+		  <li> "No updates available" </li>
 		  {% endif %}
 {% endfor %}
          </ul>
