@@ -40,6 +40,6 @@
         running_state: "running"
       assert:
         that: 
-          - win_service_state.name[BITS].state == running_state
-          - win_service_state.name[wuauserv].state == running_state
-        msg: 'Windows Services {{ win_service_state.name }} are not in running state, please start the service to proceed.'
+          - win_service_state.stdout_lines[13] == running_state
+          - win_service_state..stdout_lines[13] == running_state
+        msg: 'Windows Services {{ win_service_state.stdout_lines[11] }} are not in running state, please start the service to proceed.'
