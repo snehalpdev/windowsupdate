@@ -1,15 +1,15 @@
 ---
-- name: windows update precheck
+- name: Windows update precheck
   hosts: all
   strategy: free
   gather_facts: False
   
   tasks:
-    - name: set if the reboot is pending
+    - name: check if the reboot is pending
       win_shell: "{{ lookup('file', 'check_pending_reboot.ps1') }}"
       register: pending_reboot
       
-    - name: check if the reboot is pending
+    - name: Ensure that server reboot is not pending.
       assert:
         that: pending_reboot.stdout_lines[0] == "False"
         msg: 'Server reboot pending is {{ pending_reboot.stdout_lines[0] }}'
@@ -28,15 +28,11 @@
         msg: 'Remaining disk space has reached {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int }} need 10GB to proceed.'
       when: vol_part ==  drive_letter
         
-    - name: Get Windows Update Service Status    
+    - name: Check Windows Update Service Status    
       win_service:
         name: wuauserv
       register: win_service_state
-      
-    - name: print Windows update Service State
-      debug: 
-        msg: "{{ win_service_state.name }} {{ win_service_state.state }}"
-        
+             
     - name: Ensure Windows Update Service is running
       vars:
         service_status: "running"
