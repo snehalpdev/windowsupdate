@@ -17,7 +17,7 @@
     - name: Get disk facts
       win_disk_facts:
       
-    - name: "Ensure that free disk space on {{ vol_part }} drive is greater than 10GB"
+    - name: "Ensure that free disk space on C drive is greater than 10GB"
       vars:
         disk: '{{ ansible_facts.disks|selectattr("system_disk")|first }}'
         vol_part: '{{ disk.partitions[1].drive_letter }}'
