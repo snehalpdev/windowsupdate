@@ -16,6 +16,11 @@
   
     - name: Get disk facts
       win_disk_facts:
+      debug:
+        disk: '{{ ansible_facts.disks|selectattr("system_disk")|first }}'
+        vol_part: '{{ disk.partitions[1].drive_letter }}'
+        vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
+        vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
       
     - name: "Ensure that free disk space on {{ vol_part }} drive is greater than 10GB"
       vars:
@@ -28,4 +33,3 @@
         msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
       when: 'vol_part == "C"'
       loop: "{{ disk.partitions | subelements('volumes') }}"
-      debug: "{{ disk }} {{ vol_part }} {{ vol_part_size }} {{ vol_part_free }}"
