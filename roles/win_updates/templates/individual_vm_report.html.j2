@@ -4,13 +4,11 @@
                <ul>
 {% for k in update_result.updates %}
                   {% if update_result|length >=1 %}
-                  <li>{{ update_result.updates[k].title }}</li>
+                  <li>{{ update_result.updates[k].title }}</li></ul></td>
                   {% else %}
-		  <p> No updates available to Install </p>
+		  <td> <ul> "No updates available to Install" </ul></td>
 		  {% endif %}
 {% endfor %}
-               </ul>
-            </td>
 	    <td>
                <ul>
                       {{ update_result.reboot_required }}
