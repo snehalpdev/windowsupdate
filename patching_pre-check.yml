@@ -35,7 +35,7 @@
       
     - name: "Ensure that free disk space on C drive is greater than 10GB"
       vars:
-        disk: '{{ ansible_facts.disks[0]}'
+        disk: '{{ ansible_facts.disks[0] }}'
         vol_part: '{{ disk.partitions[1].drive_letter }}'
         vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
         vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
@@ -43,4 +43,4 @@
         that: vol_part_free > 10
         msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
       when: 'vol_part == "C"'
-      loop: "{{ disk.partitions | subelements('volumes') }}"
+      loop: "{{ disk.partitions[1] | subelements('volumes') }}"
