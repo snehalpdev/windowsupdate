@@ -29,7 +29,7 @@
       when: vol_part ==  drive_letter
         
     - name: Get Windows Update Service Status    
-      ansible.windows.win_service:
+      win_service:
         name: wuauserv
       register: win_service_state
       
