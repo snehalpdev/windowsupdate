@@ -30,11 +30,16 @@
         
     - name: Get Windows Update Service Status    
       win_service:
-        name: 
-            - wuauserv
-            - BITS
+        name: wuauserv
       register: win_service_state
       
     - name: print Windows update Service State
       debug: 
         msg: "{{ win_service_state.name }} {{ win_service_state.state }}"
+        
+    - name: Ensure Windows Update Service is running
+      vars:
+        service_status: "running"
+      assert:
+        that: win_service_state.state == service_status
+        mag: 'Windows Service {{ win_service_state.name }} is in {{ win_service_state.state }} state, start the service to proceed.'
