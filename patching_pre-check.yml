@@ -17,28 +17,10 @@
     - name: Get disk facts
       win_disk_facts:
       
-    - name: Print system disk
-      debug:
-        var: ansible_facts.disks[0]
-        
-    - name: Print system disk drive letter
-      debug:
-        var: ansible_facts.disks[0].partitions[1].drive_letter
-        
-    - name: Print system disk size
-      debug:
-        var: (ansible_facts.disks[0].partitions[1].size/1024|pow(3))|round|int
-        
-    - name: Print system disk size free
-      debug:
-        var: ansible_facts.disks[0].partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int
-      
     - name: "Ensure that free disk space on C drive is greater than 10GB"
       vars:
         disk: '{{ ansible_facts.disks[0] }}'
         vol_part: '{{ disk.partitions[1].drive_letter }}'
-        vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|round|int }}'
-        vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int }}'
         minimum_disk_space: 10
         drive_letter: "C"
       assert:
