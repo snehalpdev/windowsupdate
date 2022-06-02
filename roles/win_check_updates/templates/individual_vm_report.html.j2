@@ -6,7 +6,7 @@
                   {% if win_update|length >=1 %}
                   <li>{{ win_update.value.title }}</li>
 		  {% elif win_update|length =0 %}
-		    "No updates available"
+		    'No updates available'
 		  {% endif %}
 {% endfor %}
                </ul>
