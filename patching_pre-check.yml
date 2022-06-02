@@ -29,17 +29,17 @@
       when: vol_part ==  drive_letter
       
     - name: "Get Windows update and BITS services status"
-      win_service:
+      win_service_info:
         name:
             - BITS
             - wuauserv
-      register: win_service_state
+      register: win_service_info
         
     - name: "Ensure Windows update and BITS services are runnning"
       vars:
-        running_state: "running"
+        running_state: "started"
       assert:
         that: 
-          - win_service_state.stdout_lines[13] == running_state
-          - win_service_state..stdout_lines[13] == running_state
-        msg: 'Windows Services {{ win_service_state.stdout_lines[11] }} are not in running state, please start the service to proceed.'
+          - win_service_info.stdout_lines[13] == running_state
+          - win_service_info.stdout_lines[13] == running_state
+        msg: 'Windows Services {{ win_service_info.stdout_lines[11] }} are not in running state, please start the service to proceed.'
