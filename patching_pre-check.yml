@@ -23,8 +23,9 @@
         vol_part: '{{ disk.partitions[1].drive_letter }}'
         vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
         vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|float|round(1) }}'
-
- 
+      debug:
+        msg: "{{ disk }} {{ vol_part}} {{vol_part_size}} {{vol_part_free}}"
+        
     - name: "Ensure that free disk space on {{ vol_part }} drive is greater than 10GB"
       assert:
         that: vol_part_free > 10
