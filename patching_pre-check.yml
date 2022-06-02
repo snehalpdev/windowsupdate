@@ -30,4 +30,4 @@
       loop: "{{ disk.partitions | subelements('volumes') }}"
       
     - debug:
-        msg: "{{ disk }} {{ vol_part }} {{ vol_part_size}} {{vol_part_free }}"
+        msg: "{{ vol_part }} {{ vol_part_size}} {{vol_part_free }}"
