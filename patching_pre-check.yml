@@ -27,3 +27,21 @@
         that: disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int > minimum_disk_space
         msg: 'Remaining disk space has reached {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int }} need 10GB to proceed.'
       when: vol_part ==  drive_letter
+      
+    - name: "Get Windows update and BITS services status"
+      ansible.windows.win_service:
+        name: "{{ item }}"
+      register: win_service_state
+      with_items:
+        - BITS
+        - wuauserv
+        
+    - name: "Ensure Windows update and BITS services are runnning"
+      vars:
+        service_status: {{ win_service_state }}
+        running_state: "running"
+      assert:
+        that: 
+          - win_service_state.name[BITS].state == running_state
+          - win_service_state.name[wuauserv].state == running_state
+        msg: 'Windows Services {{ win_service_state.name }} are not in running state, please start the service to proceed.'
