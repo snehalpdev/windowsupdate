@@ -34,7 +34,8 @@
             - BITS
             - wuauserv
       register: win_service_state
-      debug: 
+      
+    - debug: 
         msg: {{ win_service_state }}
       
     - name: "Ensure Windows Update and BITS services are runnning"   
