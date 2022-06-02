@@ -35,4 +35,4 @@
       
     - name: print Windows update Service State
       debug: 
-        msg: "{{ win_service_state }}"
+        msg: "{{ win_service_state.name }} {{ win_service_state.state }}"
