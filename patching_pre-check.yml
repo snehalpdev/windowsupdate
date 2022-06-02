@@ -17,8 +17,8 @@
     - name: Get disk facts
       win_disk_facts:
 
-    - name: Output first disk size
-      debug:
+    - name: Iterate partitions and volumes on first disk and get disk size used and disk size free 
+      vars:
         disk: '{{ ansible_facts.disks[0] }}'
         vol_part: '{{ disk.partitions[1].drive_letter }}'
         vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|float|round(1) }}'
