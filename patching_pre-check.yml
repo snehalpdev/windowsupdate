@@ -19,15 +19,15 @@
       
     - name: Print system disk
       debug:
-        var: ansible_facts.disks|selectattr("system_disk")|first
+        var: ansible_facts.disks[0]
         
     - name: Print system disk
       debug:
-        var: ansible_facts.disk.partitions[1].drive_letter
+        var: ansible_facts.disks[0].partitions[1].drive_letter
         
     - name: Print system disk
       debug:
-        var: ansible_facts.(disk.partitions[1].size/1024|pow(3))|float|round(1)
+        var: (ansible_facts.disks[0].partitions[1].size/1024|pow(3))|float|round(1)
       
     - name: "Ensure that free disk space on C drive is greater than 10GB"
       vars:
