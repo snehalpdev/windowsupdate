@@ -39,6 +39,9 @@
         vol_part: '{{ disk.partitions[1].drive_letter }}'
         vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|round|int }}'
         vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int }}'
+        minimum_disk_space: 10
+        drive_letter: "C"
       assert:
-        that: 'vol_part_free > 10'
-        msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
+        that: disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int > minimum_disk_space
+        msg: 'Remaining disk space has reached {{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int }} need 10GB to proceed.'
+      when: vol_part ==  drive_letter
