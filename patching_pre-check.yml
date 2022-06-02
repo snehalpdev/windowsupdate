@@ -40,5 +40,5 @@
         vol_part_size: '{{ (disk.partitions[1].size/1024|pow(3))|round|int }}'
         vol_part_free: '{{ disk.partitions[1].volumes[0].size_remaining/1024|pow(3)|round|int }}'
       assert:
-        that: vol_part_free > 10
+        that: 'vol_part_free > 10'
         msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
