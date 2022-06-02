@@ -29,15 +29,14 @@
       when: vol_part ==  drive_letter
       
     - name: "Get Windows update and BITS services status"
-      ansible.windows.win_service:
+      win_service:
         name:
-          - BITS
-          - wuauserv
+            - BITS
+            - wuauserv
       register: win_service_state
         
     - name: "Ensure Windows update and BITS services are runnning"
       vars:
-        service_status: {{ win_service_state }}
         running_state: "running"
       assert:
         that: 
