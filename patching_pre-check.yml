@@ -30,11 +30,10 @@
       
     - name: "Get Windows update and BITS services status"
       ansible.windows.win_service:
-        name: "{{ item }}"
+        name:
+          - BITS
+          - wuauserv
       register: win_service_state
-      with_items:
-        - BITS
-        - wuauserv
         
     - name: "Ensure Windows update and BITS services are runnning"
       vars:
