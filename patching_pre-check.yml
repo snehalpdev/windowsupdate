@@ -28,6 +28,4 @@
         msg: 'Remaining disk space has reached {{ vol_part_free }} need 10GB to proceed.'
       when: 'vol_part == "C"'
       loop: "{{ disk.partitions | subelements('volumes') }}"
-      
-    - debug:
-        msg: "{{ vol_part }} {{ vol_part_size}} {{vol_part_free }}"
+      debug: "{{ disk }} {{ vol_part }} {{ vol_part_size }} {{ vol_part_free }}"
