@@ -30,7 +30,7 @@
         
     - name: Get Windows Update Service Status    
       win_service:
-        name: wuauserv
+        name: wuauserv; BITS
       register: win_service_state
       
     - name: print Windows update Service State
