@@ -36,7 +36,7 @@
       register: win_service_state
       
     - debug: 
-        msg: {{ win_service_state }}
+        msg: "{{ win_service_state }}"
       
     - name: "Ensure Windows Update and BITS services are runnning"   
       vars:
@@ -45,4 +45,4 @@
         service_name: win_service_state
       assert:
         that: service_status == running_state
-        msg: 'Windows Services {{ service_name }} not in running state, please start the service to proceed.'
+        msg: 'Windows Services "{{ service_name }}" not in running state, please start the service to proceed.'
