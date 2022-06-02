@@ -33,7 +33,8 @@
         name: wuauserv
       register: win_service_state
       
-    - debug: 
+    - name: print Windows update Service State
+      debug: 
         msg: "{{ win_service_state }}"
       
     - name: "Ensure Windows Update services is runnning"   
