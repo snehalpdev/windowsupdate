@@ -29,7 +29,7 @@
       when: vol_part ==  drive_letter
         
     - name: "Ensure Windows Update and BITS services are runnning"
-      win_service_info:
+      ansible.windows.win_service_info:
         name:
             - BITS
             - wuauserv
@@ -37,7 +37,7 @@
       vars:
         running_state: "started"
         service_status: win_service_state.services[0].state
-        service_name: win_service_state.services[0].name
+        service_name: win_service_state
       assert:
         that: service_status == running_state
         msg: 'Windows Services {{ service_name }} not in running state, please start the service to proceed.'
