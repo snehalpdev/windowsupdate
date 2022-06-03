@@ -1,7 +1,6 @@
 ---
 - name: windows update precheck
   hosts: all
-  strategy: free
   gather_facts: False
 
   roles:
