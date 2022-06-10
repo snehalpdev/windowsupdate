@@ -39,5 +39,5 @@
         service_name: "wuauserv"
       assert:
         that: win_service_state.state == service_status
-        mag: 'Windows Service {{ win_service_state.name }} is in {{ win_service_state.state }} state, start the service to proceed.'
+        msg: 'Windows Service {{ win_service_state.name }} is in {{ win_service_state.state }} state, start the service to proceed.'
       when: win_service_state.name == service_name
