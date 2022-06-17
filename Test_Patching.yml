@@ -19,3 +19,4 @@
           state: installed
           reboot: yes
         register: update_result
+      - debug: var=installed 
