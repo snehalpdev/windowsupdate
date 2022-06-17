@@ -2,7 +2,6 @@
 
 - name: install updates
   hosts: all
-  gather_facts: False
   
   tasks:
     - name: Install Windows updates
