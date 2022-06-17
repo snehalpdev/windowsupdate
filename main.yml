@@ -3,7 +3,7 @@
   ignore_errors: true
 
   tasks:
-   - shell: ansible-playbook Test_Patching.yml
+   - include: ansible-playbook Test_Patching.yml
      register: results
      retries: 5
    - debug: var=results
