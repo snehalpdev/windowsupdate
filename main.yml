@@ -5,5 +5,5 @@
   tasks:
    - shell: ansible-playbook Test_Patching.yml
      register: results
-     until: "'\"found_update_count\": 0' in results.stdout"
+     until: "'\"found_update_count\": 0' in results.stdout_lines[0]"
      retries: 5
