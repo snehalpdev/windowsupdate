@@ -8,7 +8,7 @@
   tasks:
     - name: Install Windows updates
       win_updates:
-        category_names: [“CriticalUpdates”, “SecurityUpdates”, "DefinitionUpdates", "Updates", "UpdateRollups"]
+        category_names: [“Critical Updates”, “Security Updates”, "Definition Updates", "Updates", "Update Rollups"]
         blacklist: "{{ blacklist_package | default(omit, true) }}"
         whitelist: "{{ whitelist_package | default(omit, true) }}"
         state: installed
