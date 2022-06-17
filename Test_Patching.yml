@@ -1,0 +1,25 @@
+---
+
+- name: install updates
+  hosts: all
+  strategy: free
+  gather_facts: False
+
+- name: Search and return list of found updates
+  win_updates:
+    category_names: "{{ category }}"
+    state: searched
+  register: list_of_updates
+
+- name: Install Windows updates
+  win_updates:
+    category_names: "{{ category }}"
+    blacklist: "{{ blacklist_package | default(omit, true) }}"
+    whitelist: "{{ whitelist_package | default(omit, true) }}"
+    state: installed
+  register: update_result
+  when: list_of_updates.found_update_count >0
+  
+- win_reboot:
+    reboot_timeout: 3600
+  when: update_result.reboot_required
