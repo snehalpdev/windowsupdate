@@ -8,13 +8,13 @@
   tasks:
     - name: Search and return list of found updates
       win_updates:
-        category_names: "{{ category }}"
+        category_names: "*"
         state: searched
       register: list_of_updates
 
     - name: Install Windows updates
       win_updates:
-        category_names: "{{ category }}"
+        category_names: "*"
         blacklist: "{{ blacklist_package | default(omit, true) }}"
         whitelist: "{{ whitelist_package | default(omit, true) }}"
         state: installed
