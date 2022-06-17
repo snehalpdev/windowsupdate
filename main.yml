@@ -7,5 +7,4 @@
      register: results
      until: "'\"found_update_count\": 0' in results.stdout"
      retries: 5
-   - debug:
-       msg: {{ results }}
+   - debug: var=results
