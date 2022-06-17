@@ -6,4 +6,4 @@
    - shell: ansible-playbook Test_Patching.yml
      register: results
      until: "'\"found_update_count\": 0' in results.stdout"
-         retries: 5
+     retries: 5
