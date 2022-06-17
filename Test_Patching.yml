@@ -18,9 +18,7 @@
         blacklist: "{{ blacklist_package | default(omit, true) }}"
         whitelist: "{{ whitelist_package | default(omit, true) }}"
         state: installed
+        reboot: yes
       register: update_result
       when: list_of_updates.found_update_count >0
-  
-    - win_reboot:
-        reboot_timeout: 3600
-      when: update_result.reboot_required
+      
