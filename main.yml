@@ -4,6 +4,4 @@
 
   tasks:
    - include: Test_Patching.yml
-     register: results
      retries: 5
-   - debug: var=results
