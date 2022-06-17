@@ -1,7 +1,9 @@
 ---
-- hosts: all
-  strategy: free
+- hosts: localhost
+  ignore_errors: true
+
   tasks:
-  - name: Search and Install Update on
-    win_shell: "{{ lookup('file', 'winupdate.ps1') }}"
-    register: installed_updates
+   - shell: ansible-playbook wu.yml
+     register: results
+     until: "'\"found_update_count\": 0' in results.stdout"
+         retries: 5
