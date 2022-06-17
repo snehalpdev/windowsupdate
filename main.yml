@@ -3,7 +3,7 @@
   ignore_errors: true
 
   tasks:
-   - shell: ansible-playbook wu.yml
+   - shell: ansible-playbook Test_Patching.yml
      register: results
      until: "'\"found_update_count\": 0' in results.stdout"
          retries: 5
