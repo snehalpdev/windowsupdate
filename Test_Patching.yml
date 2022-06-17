@@ -10,7 +10,5 @@
     whitelist: "{{ whitelist_package | default(omit, true) }}"
     state: installed
     reboot: yes
-  register: update_result  
-  when: update_result.found_update_count > 0
-  
+  register: update_result
 - debug: var=update_result
