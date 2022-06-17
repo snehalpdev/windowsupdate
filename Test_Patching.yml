@@ -6,12 +6,6 @@
   gather_facts: False
   
   tasks:
-    - name: Search and return list of found updates
-      win_updates:
-        category_names: [“CriticalUpdates”, “SecurityUpdates”, "DefinitionUpdates", "Updates", "UpdateRollups"]
-        state: downloaded
-      register: list_of_updates
-
     - name: Install Windows updates
       win_updates:
         category_names: [“CriticalUpdates”, “SecurityUpdates”, "DefinitionUpdates", "Updates", "UpdateRollups"]
