@@ -1,30 +1,35 @@
 ---
-- name: Search Windows updates
-  win_updates:
-    category_names:
-      - SecurityUpdates
-      - CriticalUpdates
-      - UpdateRollups
-      - DefinitionUpdates
-      - Updates
-    blacklist: "{{ blacklist_package | default(omit, true) }}"
-    whitelist: "{{ whitelist_package | default(omit, true) }}"
-    state: searched
-    register: searched_update
-- debug: var=searched_update
+- name: Install Updates
+  hosts: all
+  gather_facts: false
+  
+  tasks:
+    - name: Search Windows updates
+      win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+          - DefinitionUpdates
+          - Updates
+        blacklist: "{{ blacklist_package | default(omit, true) }}"
+        whitelist: "{{ whitelist_package | default(omit, true) }}"
+        state: searched
+        register: searched_update
+    - debug: var=searched_update
 
-- name: Install Windows updates
-  win_updates:
-    category_names:
-      - SecurityUpdates
-      - CriticalUpdates
-      - UpdateRollups
-      - DefinitionUpdates
-      - Updates
-    blacklist: "{{ blacklist_package | default(omit, true) }}"
-    whitelist: "{{ whitelist_package | default(omit, true) }}"
-    state: installed
-    reboot: yes
-  register: update_result
-  when: searched_update.found_update_count > 0
-- debug: var=update_result
+    - name: Install Windows updates
+      win_updates:
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+          - DefinitionUpdates
+          - Updates
+        blacklist: "{{ blacklist_package | default(omit, true) }}"
+        whitelist: "{{ whitelist_package | default(omit, true) }}"
+        state: installed
+        reboot: yes
+      register: update_result
+      when: searched_update.found_update_count > 0
+    - debug: var=update_result
