@@ -17,5 +17,4 @@
         state: installed
         reboot: yes
       register: update_result
-      when: update_result.found_update_count > 0
     - debug: var=update_result
