@@ -16,6 +16,6 @@
         whitelist: "{{ whitelist_package | default(omit, true) }}"
         state: installed
         reboot: yes
-          reboot_timeout: 3600
+        reboot_timeout: 3600
       register: update_result
     - debug: var=update_result
