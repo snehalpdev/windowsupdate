@@ -1,6 +1,7 @@
 ---
 - name: Install Updates
   hosts: all
+  ignore_errors: true
   gather_facts: false
   
   tasks:
