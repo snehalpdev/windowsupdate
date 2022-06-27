@@ -26,7 +26,7 @@
         register: pending_reboot
         changed_when: pending_reboot.stdout_lines[0] != 'False'
         notify: reboot windows
-  handlers:
-    - name: reboot windows
-      win_reboot:
-        reboot_timeout: 3600
+      handlers:
+        - name: reboot windows
+            win_reboot:
+              reboot_timeout: 3600
