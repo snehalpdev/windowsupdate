@@ -17,7 +17,7 @@
         blacklist: "{{ blacklist_package | default(omit, true) }}"
         whitelist: "{{ whitelist_package | default(omit, true) }}"
         state: installed
-        reboot: yes
+        win_reboot: yes
           reboot_timeout: 3600
       register: update_result
     - debug: var=update_result
