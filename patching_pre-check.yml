@@ -31,6 +31,7 @@
     - name: Check Windows Update Service Status    
       win_service:
         name: wuauserv
+        state: started
       register: win_service_state
              
     - name: Ensure Windows Update Service is running
