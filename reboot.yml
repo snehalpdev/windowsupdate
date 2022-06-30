@@ -14,5 +14,5 @@
             Reboot pending on Host {{ inventory_hostname }} is {{ pending_reboot.stdout_lines[0] }}
   handlers:
     - name: reboot windows
-      win_reboot:
-        reboot_timeout: 3600
+      reboot: yes
+      reboot_timeout: 3600
